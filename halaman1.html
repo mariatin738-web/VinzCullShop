@@ -1,0 +1,35 @@
+import React, { useState } from 'react';
+import GameCard from '../components/GameCard';
+import SearchBar from '../components/SearchBar';
+
+const HomePage = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  const games = [
+    { id: 1, name: 'Free Fire', logo: '/images/freefire.png' },
+    { id: 2, name: 'Mobile Legends', logo: '/images/mlbb.png' },
+    { id: 3, name: 'PUBG Mobile', logo: '/images/pubg.png' },
+    { id: 4, name: 'Valorant', logo: '/images/valorant.png' }
+  ];
+
+  const filteredGames = games.filter(game =>
+    game.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="home-page">
+      <h1>Selamat Datang di Vinz Cull Shop</h1>
+      <p>Top up game favoritmu dengan mudah dan cepat!</p>
+      
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      
+      <div className="game-list">
+        {filteredGames.map(game => (
+          <GameCard key={game.id} game={game} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;
