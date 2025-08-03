@@ -1,0 +1,6 @@
+MONGODB_URI=mongodb://localhost:27017/fftopup
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_email_password
+TWILIO_SID=your_twilio_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_PHONE_NUMBER=your_twilio_phone_number
