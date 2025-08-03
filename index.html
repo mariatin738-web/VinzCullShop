@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF TopUp | Free Fire Diamonds</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span>FF</span>TopUp
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#" onclick="showPage('products')">Diamonds</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <section class="hero">
+                    <h1>Free Fire Diamond Top-Up</h1>
+                    <p>Instant delivery, secure payment, and the best prices for Free Fire diamonds</p>
+                    <div class="product-card" onclick="showPage('products')">
+                        <img src="img/freefire-logo.png" alt="Free Fire">
+                        <h3>Free Fire Diamonds</h3>
+                        <p>Click to view all packages</p>
+                        <button class="btn">View Packages</button>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Products Page -->
+            <div id="products" class="page">
+                <h2>Choose Your Diamond Package</h2>
+                <p>Select the amount of diamonds you want to purchase</p>
+                
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products loaded via JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Checkout Page -->
+            <div id="checkout" class="page">
+                <div class="form-container">
+                    <h2>Complete Your Order</h2>
+                    <p id="selected-package-text" style="margin-bottom: 20px;"></p>
+                    
+                    <form id="gameDataForm">
+                        <div class="form-group">
+                            <label for="gameId">Free Fire ID</label>
+                            <input type="text" id="gameId" required placeholder="Enter your Free Fire ID">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nickname">Nickname</label>
+                            <input type="text" id="nickname" required placeholder="Enter your in-game nickname">
+                        </div>
+                        
+                        <input type="hidden" id="selectedPackage">
+                        
+                        <button type="button" class="btn" onclick="showPaymentOptions()">Continue to Payment</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Payment Page -->
+            <div id="payment" class="page">
+                <div class="form-container">
+                    <h2>Select Payment Method</h2>
+                    <p style="margin-bottom: 20px;">Choose your preferred payment option</p>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method" onclick="showPaymentLink('dana')">
+                            <img src="img/dana-logo.png" alt="DANA">
+                            <p>DANA</p>
+                        </div>
+                        <div class="payment-method" onclick="showQRISPayment()">
+                            <img src="img/qris-logo.png" alt="QRIS">
+                            <p>QRIS</p>
+                        </div>
+                    </div>
+                    
+                    <div id="paymentLink" class="payment-link" style="display: none;">
+                        <a id="paymentLinkAnchor" target="_blank" class="btn">Proceed to Payment</a>
+                        <p style="margin-top: 15px; font-size: 14px;">After payment, your order will be processed automatically.</p>
+                    </div>
+                    
+                    <div id="qrisDisplay" class="qris-display" style="display: none;">
+                        <h3>QRIS Payment</h3>
+                        <p class="instructions">Scan QR code below using your mobile banking/DANA/GoPay/OVO app</p>
+                        <img id="qrisImage" src="" alt="QRIS Code">
+                        <p class="instructions">Total Amount: <strong id="qrisAmount"></strong></p>
+                        <button class="btn confirmation-btn" onclick="showConfirmationForm()">I Have Paid</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Confirmation Form -->
+            <div id="confirmationForm" class="page">
+                <div class="form-container">
+                    <h2>Payment Confirmation</h2>
+                    <p>Please upload your payment proof and complete the form</p>
+                    
+                    <form id="paymentConfirmationForm">
+                        <div class="form-group">
+                            <label for="paymentProof">Payment Proof (Screenshot/Photo)</label>
+                            <input type="file" id="paymentProof" accept="image/*" required>
+                            <div id="proofPreview" style="margin-top: 10px; display: none;">
+                                <img id="proofImage" src="#" alt="Payment Proof" style="max-width: 100%; max-height: 200px;">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="senderName">Sender Name (as in payment app)</label>
+                            <input type="text" id="senderName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="paymentTime">Payment Time</label>
+                            <input type="datetime-local" id="paymentTime" required>
+                        </div>
+                        
+                        <button type="button" class="btn" onclick="confirmPayment()">Submit Confirmation</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Status Page -->
+            <div id="statusPage" class="page">
+                <div class="form-container status-container">
+                    <div id="statusIcon">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <h2 id="statusTitle">Verifying Your Payment</h2>
+                    <p id="statusMessage">Please wait while we verify your payment...</p>
+                    <div id="orderDetails" style="text-align: left; margin-top: 20px;"></div>
+                    <button id="statusButton" class="btn" onclick="showPage('home')" style="display: none; margin-top: 20px;">Back to Home</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 FF TopUp. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
